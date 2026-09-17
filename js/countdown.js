@@ -1,4 +1,4 @@
-// 倒计时模块
+// 倒计时模块（支持开始时间 + 结束时间）
 window.Countdown = (function () {
   const { $ } = Utils;
   let cfg = null;
@@ -7,15 +7,24 @@ window.Countdown = (function () {
 
   function init(context) {
     ctx = context;
-    cfg = Store.loadCountdown() || { label: '专升本考试', target: ctx.endDate.getTime() };
+    const saved = Store.loadCountdown();
+    if (saved && saved.target) {
+      cfg = saved;
+      // 兼容旧数据：没有 start 时用项目开始日期
+      if (!cfg.start) cfg.start = ctx.startDate.getTime();
+    } else {
+      cfg = { label: '专升本考试', start: ctx.startDate.getTime(), target: ctx.endDate.getTime() };
+    }
 
     $('#btn-countdown-settings').addEventListener('click', openForm);
     $('#btn-countdown-cancel').addEventListener('click', closeForm);
     $('#btn-countdown-save').addEventListener('click', () => {
       const label = $('#countdown-label-input').value.trim() || '倒计时';
+      const start = new Date($('#countdown-start-input').value).getTime();
       const target = new Date($('#countdown-target-input').value).getTime();
-      if (isNaN(target)) { Toast.show('请选择有效的目标日期', 'error'); return; }
-      cfg = { label, target };
+      if (isNaN(start) || isNaN(target)) { Toast.show('请选择有效的开始和结束时间', 'error'); return; }
+      if (start >= target) { Toast.show('开始时间必须早于结束时间', 'error'); return; }
+      cfg = { label, start, target };
       Store.saveCountdown(cfg);
       update();
       closeForm();
@@ -27,24 +36,44 @@ window.Countdown = (function () {
   }
 
   function update() {
-    const diff = cfg.target - Date.now();
+    const now = Date.now();
     $('#countdown-label').textContent = cfg.label || '倒计时';
-    if (diff <= 0) {
+
+    if (now >= cfg.target) {
       $('#countdown-display').textContent = '已到达';
       $('#countdown-sub').textContent = '加油！';
       return;
     }
+    if (now < cfg.start) {
+      // 还没到开始时间，显示距离开始的时间
+      const diff = cfg.start - now;
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const minutes = Math.floor((diff % 3600000) / 60000);
+      const seconds = Math.floor((diff % 60000) / 1000);
+      $('#countdown-display').textContent = `${days}天`;
+      $('#countdown-sub').textContent =
+        `距开始 ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      return;
+    }
+
+    // 在时间段内：显示剩余天数 + 进度百分比
+    const diff = cfg.target - now;
+    const total = cfg.target - cfg.start;
+    const elapsed = now - cfg.start;
+    const progress = Math.min(100, Math.round((elapsed / total) * 100));
     const days = Math.floor(diff / 86400000);
     const hours = Math.floor((diff % 86400000) / 3600000);
     const minutes = Math.floor((diff % 3600000) / 60000);
     const seconds = Math.floor((diff % 60000) / 1000);
     $('#countdown-display').textContent = `${days}天`;
     $('#countdown-sub').textContent =
-      `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} · ${progress}%`;
   }
 
   function openForm() {
     $('#countdown-label-input').value = cfg.label || '';
+    $('#countdown-start-input').value = Utils.formatDateTimeLocal(new Date(cfg.start));
     $('#countdown-target-input').value = Utils.formatDateTimeLocal(new Date(cfg.target));
     $('#countdown-form').classList.remove('hidden');
   }
