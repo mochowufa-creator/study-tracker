@@ -1,0 +1,134 @@
+/* ===== 自定义样式：动画、响应式微调、可访问性 ===== */
+
+/* 无滚动条工具类 */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Lucide 图标基线 */
+[data-icon] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  background-color: currentColor;
+}
+
+/* 平滑主题切换 */
+html { transition: background-color .3s ease, color .3s ease; }
+body, main, header, section, article { transition: background-color .3s ease, color .3s ease, border-color .3s ease; }
+
+/* 卡片渐入动画 */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fade-in-up .35s ease-out both; }
+
+/* 进度条动画 */
+#progress-fill { transition: width .6s cubic-bezier(.4, 0, .2, 1); }
+#progress-marker { transition: left .6s cubic-bezier(.4, 0, .2, 1), transform .2s ease; }
+#progress-marker:hover { transform: translate(-50%, -2px) scale(1.05); }
+
+/* 状态徽章微动效 */
+.status-badge { transition: all .2s ease; }
+
+/* 输入框焦点过渡 */
+input, textarea, select { transition: border-color .2s ease, box-shadow .2s ease; }
+
+/* ===== 移动端适配（<640px）===== */
+@media (max-width: 640px) {
+  #header .grid { gap: .5rem; }
+  #countdown-form { width: 100%; }
+  #daily-cards { gap: .75rem; }
+  #daily-cards article { padding: 1rem; }
+  #week-navigation button { padding: .5rem .75rem; font-size: .8rem; }
+  #header h1 { font-size: 1.25rem; }
+  #progress-marker { height: 2rem; top: -1.5rem; }
+}
+
+/* ===== 平板（640-1024px）===== */
+@media (min-width: 640px) and (max-width: 1024px) {
+  #daily-cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ===== 桌面（>1024px）===== */
+@media (min-width: 1280px) {
+  #daily-cards { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ===== 触控设备优化 ===== */
+@media (hover: none) {
+  button, select, input, textarea { min-height: 36px; }
+  .touch-target { padding: .625rem .875rem; }
+}
+
+/* 减少动画（用户偏好）*/
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* 自定义滚动条（桌面）*/
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--brand-border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--brand-muted-foreground); }
+
+/* Toast 容器 */
+#toast-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  pointer-events: none;
+}
+.toast {
+  pointer-events: auto;
+  min-width: 200px;
+  max-width: 360px;
+  padding: .75rem 1rem;
+  border-radius: 8px;
+  background: var(--brand-card);
+  color: var(--brand-card-foreground);
+  border: 1px solid var(--brand-border);
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  font-size: .875rem;
+  animation: toast-in .3s ease-out;
+}
+.toast.toast-success { border-left: 4px solid var(--brand-success); }
+.toast.toast-error { border-left: 4px solid var(--brand-error); }
+.toast.toast-warning { border-left: 4px solid var(--brand-warning); }
+.toast.toast-info { border-left: 4px solid var(--brand-info); }
+.toast.leaving { animation: toast-out .3s ease-in forwards; }
+@keyframes toast-in { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes toast-out { to { opacity: 0; transform: translateX(20px); } }
+
+/* 周切换滑动反馈 */
+.swipe-hint {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--brand-card);
+  border: 1px solid var(--brand-border);
+  padding: .5rem 1rem;
+  border-radius: 9999px;
+  font-size: .75rem;
+  color: var(--brand-muted-foreground);
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  opacity: 0;
+  transition: opacity .2s;
+  pointer-events: none;
+  z-index: 50;
+}
+.swipe-hint.show { opacity: 1; }
