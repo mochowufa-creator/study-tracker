@@ -1,0 +1,10 @@
+{
+  "name": "study-tracker",
+  "version": "1.0.0",
+  "description": "专升本学习记录 - 基于设计稿的可运行静态项目",
+  "private": true,
+  "scripts": {
+    "dev": "npx --yes serve . -l 5173",
+    "start": "npx --yes serve . -l 5173"
+  }
+}
