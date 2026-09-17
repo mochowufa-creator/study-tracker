@@ -1,0 +1,14 @@
+{
+  "name": "专升本学习记录",
+  "short_name": "学习记录",
+  "description": "专升本备考期间的学习打卡与复盘工具",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f8fafc",
+  "theme_color": "#0d9488",
+  "icons": [
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
