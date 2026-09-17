@@ -51,7 +51,7 @@ window.IO = (function () {
   function handleMarkerUpload(file) {
     if (!file) return;
     if (!file.type.startsWith('image/')) { Toast.show('请上传图片文件', 'error'); return; }
-    if (file.size > 1024 * 1024) { Toast.show('图片不能超过 1MB', 'warning'); return; }
+    if (file.size > 1024 * 1024 * 1024) { Toast.show('图片不能超过 1GB', 'warning'); return; }
     const reader = new FileReader();
     reader.onload = (e) => {
       const dataUrl = e.target.result;
