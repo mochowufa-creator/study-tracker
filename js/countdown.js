@@ -75,6 +75,14 @@ window.Countdown = (function () {
     $('#countdown-label-input').value = cfg.label || '';
     $('#countdown-start-input').value = Utils.formatDateTimeLocal(new Date(cfg.start));
     $('#countdown-target-input').value = Utils.formatDateTimeLocal(new Date(cfg.target));
+    // 联动：开始/结束时间互相约束
+    const startEl = $('#countdown-start-input');
+    const targetEl = $('#countdown-target-input');
+    startEl.min = '';
+    targetEl.min = startEl.value;
+    startEl.max = targetEl.value;
+    startEl.onchange = () => { targetEl.min = startEl.value; };
+    targetEl.onchange = () => { startEl.max = targetEl.value; };
     $('#countdown-form').classList.remove('hidden');
   }
   function closeForm() { $('#countdown-form').classList.add('hidden'); }
