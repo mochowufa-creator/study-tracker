@@ -1,0 +1,46 @@
+/* ===== 主题变量：与设计稿完全一致（teal 主色）===== */
+:root {
+  --brand-background: #f8fafc;
+  --brand-foreground: #0f172a;
+  --brand-card: #ffffff;
+  --brand-card-foreground: #0f172a;
+  --brand-popover: #ffffff;
+  --brand-popover-foreground: #0f172a;
+  --brand-primary: #0d9488;
+  --brand-primary-foreground: #ffffff;
+  --brand-muted: #f1f5f9;
+  --brand-muted-foreground: #64748b;
+  --brand-border: #e2e8f0;
+  --brand-input: #e2e8f0;
+  --brand-ring: #0d9488;
+  --brand-radius-sm: 4px;
+  --brand-radius-md: 8px;
+  --brand-radius-lg: 16px;
+  --brand-success: #22c55e;
+  --brand-warning: #f59e0b;
+  --brand-error: #ef4444;
+  --brand-info: #3b82f6;
+  color-scheme: light;
+}
+
+/* ===== 暗色主题（按同色系深色版补充，可切换）===== */
+[data-theme="dark"] {
+  --brand-background: #0b1220;
+  --brand-foreground: #e2e8f0;
+  --brand-card: #111827;
+  --brand-card-foreground: #e2e8f0;
+  --brand-popover: #111827;
+  --brand-popover-foreground: #e2e8f0;
+  --brand-primary: #14b8a6;
+  --brand-primary-foreground: #04211d;
+  --brand-muted: #1f2937;
+  --brand-muted-foreground: #94a3b8;
+  --brand-border: #1f2937;
+  --brand-input: #1f2937;
+  --brand-ring: #14b8a6;
+  --brand-success: #22c55e;
+  --brand-warning: #f59e0b;
+  --brand-error: #ef4444;
+  --brand-info: #3b82f6;
+  color-scheme: dark;
+}
