@@ -58,20 +58,14 @@ window.DayCards = (function () {
           <label class="mb-1 block text-xs font-medium text-muted-foreground">学习内容 / 章节</label>
           <input type="text" data-field="content" value="${f(data.content || '')}" placeholder="例如：第三章 函数" class="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-[var(--brand-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-ring)]">
         </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="mb-1 block text-xs font-medium text-muted-foreground">学习时长（小时）</label>
-            <input type="number" step="0.5" min="0" data-field="duration" value="${f(data.duration || '')}" placeholder="0" class="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-[var(--brand-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-ring)]">
-          </div>
-          <div>
-            <label class="mb-1 block text-xs font-medium text-muted-foreground">完成情况</label>
-            <select data-field="status" class="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground focus:border-[var(--brand-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-ring)]">
-              <option value="" ${!data.status ? 'selected' : ''}>选择状态</option>
-              <option value="已完成" ${data.status === '已完成' ? 'selected' : ''}>已完成</option>
-              <option value="部分完成" ${data.status === '部分完成' ? 'selected' : ''}>部分完成</option>
-              <option value="未完成" ${data.status === '未完成' ? 'selected' : ''}>未完成</option>
-            </select>
-          </div>
+        <div>
+          <label class="mb-1 block text-xs font-medium text-muted-foreground">完成情况</label>
+          <select data-field="status" class="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground focus:border-[var(--brand-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-ring)]">
+            <option value="" ${!data.status ? 'selected' : ''}>选择状态</option>
+            <option value="已完成" ${data.status === '已完成' ? 'selected' : ''}>已完成</option>
+            <option value="部分完成" ${data.status === '部分完成' ? 'selected' : ''}>部分完成</option>
+            <option value="未完成" ${data.status === '未完成' ? 'selected' : ''}>未完成</option>
+          </select>
         </div>
         <div>
           <label class="mb-1 block text-xs font-medium text-muted-foreground">今日总结</label>
@@ -119,7 +113,6 @@ window.DayCards = (function () {
       goal: card.querySelector('[data-field="goal"]').value,
       subject: card.querySelector('[data-field="subject"]').value,
       content: card.querySelector('[data-field="content"]').value,
-      duration: card.querySelector('[data-field="duration"]').value,
       status: card.querySelector('[data-field="status"]').value,
       summary: card.querySelector('[data-field="summary"]').value,
       plan: card.querySelector('[data-field="plan"]').value,
