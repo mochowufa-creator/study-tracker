@@ -196,16 +196,6 @@
         </div>
       </section>
 
-      <!-- 每周目标 -->
-      <section id="weekly-goal" class="mb-6 rounded-xl border border-border bg-card p-5">
-        <div class="mb-3 flex items-center gap-2">
-          <i data-lucide="target" class="h-5 w-5 text-[var(--brand-primary)]"></i>
-          <h2 class="text-lg font-semibold text-foreground">每周目标</h2>
-          <span id="weekly-goal-label" class="ml-auto text-xs text-muted-foreground">第 1 周</span>
-        </div>
-        <textarea id="weekly-goal-input" data-week="" rows="3" class="w-full rounded-lg border border-border bg-background p-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-[var(--brand-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-ring)]" placeholder="写下本周的学习目标..."></textarea>
-      </section>
-
       <!-- 每日学习记录 -->
       <section id="daily-records" class="mb-6">
         <h2 class="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
@@ -214,26 +204,6 @@
         </h2>
         <div id="week-overview" class="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7"></div>
         <div id="daily-cards" class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3"></div>
-      </section>
-
-      <!-- 每周复盘 -->
-      <section id="weekly-review" class="mb-6 rounded-xl border border-border bg-card p-5">
-        <div class="mb-3 flex items-center gap-2">
-          <i data-lucide="clipboard-list" class="h-5 w-5 text-[var(--brand-primary)]"></i>
-          <h2 class="text-lg font-semibold text-foreground">每周复盘</h2>
-          <span id="weekly-review-label" class="ml-auto text-xs text-muted-foreground">第 1 周</span>
-        </div>
-        <textarea id="weekly-review-input" data-week="" rows="3" class="w-full rounded-lg border border-border bg-background p-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-[var(--brand-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-ring)]" placeholder="回顾本周学习收获与不足..."></textarea>
-      </section>
-
-      <!-- 每月总结 -->
-      <section id="monthly-summary" class="mb-6 rounded-xl border border-border bg-card p-5">
-        <div class="mb-3 flex items-center gap-2">
-          <i data-lucide="bar-chart-2" class="h-5 w-5 text-[var(--brand-primary)]"></i>
-          <h2 class="text-lg font-semibold text-foreground">每月总结</h2>
-          <span id="monthly-summary-label" class="ml-auto text-xs text-muted-foreground">2026年9月</span>
-        </div>
-        <textarea id="monthly-summary-input" data-month="" rows="4" class="w-full rounded-lg border border-border bg-background p-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-[var(--brand-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-ring)]" placeholder="总结本月的学习成果、问题与下月计划..."></textarea>
       </section>
 
     </div>
@@ -253,7 +223,6 @@
   <script src="js/countdown.js"></script>
   <script src="js/week-nav.js"></script>
   <script src="js/day-cards.js"></script>
-  <script src="js/text-areas.js"></script>
   <script src="js/io.js"></script>
   <script src="js/theme.js"></script>
   <script src="js/gestures.js"></script>
