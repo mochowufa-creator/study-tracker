@@ -39,39 +39,33 @@ window.Countdown = (function () {
     const now = Date.now();
     $('#countdown-label').textContent = cfg.label || '倒计时';
 
-    // 总天数（按日期差，结束-开始，向上取整保证至少1天）
-    const totalMs = cfg.target - cfg.start;
-    const totalDays = Math.max(1, Math.ceil(totalMs / 86400000));
-
+    // 已到达结束时间
     if (now >= cfg.target) {
       $('#countdown-display').textContent = '已到达';
-      $('#countdown-sub').textContent = `共 ${totalDays} 天 · 加油！`;
+      $('#countdown-sub').textContent = '加油！';
       return;
     }
+    // 还没到开始时间：显示距离开始的剩余时间
     if (now < cfg.start) {
-      // 还没到开始时间，显示距离开始的时间
       const diff = cfg.start - now;
       const days = Math.floor(diff / 86400000);
       const hours = Math.floor((diff % 86400000) / 3600000);
       const minutes = Math.floor((diff % 3600000) / 60000);
       const seconds = Math.floor((diff % 60000) / 1000);
-      $('#countdown-display').textContent = `${days}天`;
+      $('#countdown-display').textContent = `距开始 ${days}天`;
       $('#countdown-sub').textContent =
-        `距开始 ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} · 共${totalDays}天`;
+        `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
       return;
     }
-
-    // 在时间段内：显示剩余天数 + 总天数 + 进度
+    // 在开始-结束之间：显示距离结束的剩余时间
     const diff = cfg.target - now;
-    const elapsed = now - cfg.start;
-    const progress = Math.min(100, Math.round((elapsed / totalMs) * 100));
     const days = Math.floor(diff / 86400000);
     const hours = Math.floor((diff % 86400000) / 3600000);
     const minutes = Math.floor((diff % 3600000) / 60000);
     const seconds = Math.floor((diff % 60000) / 1000);
-    $('#countdown-display').textContent = `剩${days}天`;
+    $('#countdown-display').textContent = `剩 ${days}天`;
     $('#countdown-sub').textContent =
-      `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} · 共${totalDays}天 · ${progress}%`;
+      `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   }
 
   function openForm() {
