@@ -33,7 +33,6 @@
 
   function onWeekChange(weekStart, offset) {
     DayCards.renderWeek(weekStart);
-    TextAreas.render(weekStart, offset);
   }
 
   function afterDaySave() {
@@ -49,7 +48,6 @@
     IO.init();
     WeekNav.init(ctx, { onChange: onWeekChange });
     DayCards.init(ctx, { afterSave: afterDaySave });
-    TextAreas.init(ctx);
     Gestures.init();
 
     Stats.update();
